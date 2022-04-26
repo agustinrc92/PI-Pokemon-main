@@ -6,17 +6,20 @@ module.exports = (sequelize) => {
   sequelize.define("pokemon", {
     id: {
       type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
       allowNull: false,
       primaryKey: true,
-      defaultValue: DataTypes.UUIDV4,
     },
     name: {
       type: DataTypes.STRING,
       allowNull: false,
-    },
-    image: {
-      type: DataTypes.STRING,
-      allowNull: false,
+      get() {
+        const val = this.getDataValue("name");
+        return val[0].toUpperCase() + val.slice(1);
+      },
+      set(value) {
+        this.setDataValue("name", value.toLowerCase());
+      },
     },
     hp: {
       type: DataTypes.INTEGER,
@@ -36,10 +39,13 @@ module.exports = (sequelize) => {
     weight: {
       type: DataTypes.INTEGER,
     },
-    createdInDb: {
+    image: {
+      type: DataTypes.STRING,
+    },
+    created: {
       type: DataTypes.BOOLEAN,
-      allowNull: false,
       defaultValue: true,
+      allowNull: false,
     },
   });
 };
