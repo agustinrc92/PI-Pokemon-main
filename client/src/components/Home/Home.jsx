@@ -4,10 +4,27 @@ import { useDispatch, useSelector } from "react-redux";
 import { getPokemons } from "../../actions";
 import { Link } from "react-router-dom";
 import Card from "../Card/Card";
+import Paginado from "../Paginado/Paginado";
 
 export default function Home() {
   const dispatch = useDispatch();
   const allPokemons = useSelector((state) => state.pokemons);
+  //Constantes para el paginado
+  const [currentPage, setCurrentPage] = useState(1);
+  const [pokemonsPerPage] = useState(12);
+  const indexOfLastPokemon = currentPage * pokemonsPerPage;
+  const indexOfFirstPokemon = indexOfLastPokemon - pokemonsPerPage;
+  const currentPokemons = allPokemons.slice(
+    indexOfFirstPokemon,
+    indexOfLastPokemon
+  );
+
+  //Para el paginado
+  const paginado = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
+  //Traer los Pokemon???????
   useEffect(() => {
     dispatch(getPokemons());
   }, [dispatch]);
@@ -46,8 +63,14 @@ export default function Home() {
           <option value="creados">Creado</option>
           <option value="existente">Existente</option>
         </select>
-        {allPokemons &&
-          allPokemons.map((el) => {
+        <Paginado
+          pokemonsPerPage={pokemonsPerPage}
+          allPokemons={allPokemons}
+          paginado={paginado}
+        />
+
+        {currentPokemons &&
+          currentPokemons.map((el) => {
             <Card name={el.name} image={el.image} types={el.types} />;
             return (
               <div>
