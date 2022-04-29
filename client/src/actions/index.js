@@ -10,3 +10,17 @@ export function getPokemons() {
     });
   };
 }
+
+export function getTypes() {
+  return async function (distpach) {
+    try {
+      const allTypes = await axios.get("http://localhost:3001/types");
+      return distpach({
+        type: "GET_TYPES",
+        payload: allTypes.data,
+      });
+    } catch (error) {
+      return error;
+    }
+  };
+}

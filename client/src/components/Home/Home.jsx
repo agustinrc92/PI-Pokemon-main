@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getPokemons } from "../../actions";
+import { getPokemons, getTypes } from "../../actions";
 import { Link } from "react-router-dom";
 import Card from "../Card/Card";
 import Paginado from "../Paginado/Paginado";
@@ -23,6 +23,11 @@ export default function Home() {
   const paginado = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
+
+  const types = useSelector((state) => state.types);
+  useEffect(() => {
+    dispatch(getTypes());
+  }, [dispatch]);
 
   //Traer los Pokemon???????
   useEffect(() => {
@@ -56,7 +61,13 @@ export default function Home() {
           <option value="desc">Fuerte a Debil</option>
         </select>
         <select>
-          <option value="All">Tipo</option>
+          <option disabled>Filter By Type</option>
+          <option value="All">All Types</option>
+          {types.map((types) => (
+            <option value={types.name} key={types.id}>
+              {types.name[0].toUpperCase() + types.name.slice(1)}
+            </option>
+          ))}
         </select>
         <select>
           <option value="All">Todos</option>
