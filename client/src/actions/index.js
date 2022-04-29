@@ -24,3 +24,10 @@ export function getTypes() {
     }
   };
 }
+
+export function filterPokemonsByTypes(payload) {
+  return {
+    type: "FILTER_POKEMONS_BY_TYPES",
+    payload,
+  };
+}

@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getPokemons, getTypes } from "../../actions";
+import { getPokemons, getTypes, filterPokemonsByTypes } from "../../actions";
 import { Link } from "react-router-dom";
 import Card from "../Card/Card";
 import Paginado from "../Paginado/Paginado";
@@ -37,8 +37,12 @@ export default function Home() {
 
   //Handle para recargar todos los Pokemon
   function handleClick(e) {
-    e.preventDefault();
-    dispatch(getPokemons());
+    dispatch(filterPokemonsByTypes(e.target.value));
+  }
+
+  //Handle para filtrar los Pokemon por tipo
+  function handleFilterTypes(e) {
+    dispatch(filterPokemonsByTypes(e.target.value));
   }
 
   return (
@@ -61,7 +65,7 @@ export default function Home() {
           <option value="asc">Debil a Fuerte</option>
           <option value="desc">Fuerte a Debil</option>
         </select>
-        <select>
+        <select onChange={(e) => handleFilterTypes(e)}>
           <option disabled>Filter By Type</option>
           <option value="All">All Types</option>
           {types.map((types) => (

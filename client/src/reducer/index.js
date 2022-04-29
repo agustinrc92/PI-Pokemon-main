@@ -18,6 +18,16 @@ function rootReducer(state = initialState, action) {
         ...state,
         types: action.payload,
       };
+    case "FILTER_POKEMONS_BY_TYPES":
+      const allPokemons = state.pokemons;
+      const typesFiltered =
+        action.payload === "All"
+          ? allPokemons
+          : allPokemons.filter((el) => el.types.includes(action.payload));
+      return {
+        ...state,
+        pokemons: typesFiltered,
+      };
     default:
       return state;
   }
