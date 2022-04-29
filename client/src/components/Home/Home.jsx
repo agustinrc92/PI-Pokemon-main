@@ -24,12 +24,13 @@ export default function Home() {
     setCurrentPage(pageNumber);
   };
 
+  //Traer los types
   const types = useSelector((state) => state.types);
   useEffect(() => {
     dispatch(getTypes());
   }, [dispatch]);
 
-  //Traer los Pokemon???????
+  //Traer los Pokemon
   useEffect(() => {
     dispatch(getPokemons());
   }, [dispatch]);
