@@ -1,10 +1,17 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getPokemons, getTypes, filterPokemonsByTypes } from "../../actions";
+import {
+  getPokemons,
+  getTypes,
+  filterPokemonsByTypes,
+  filterCreated,
+  orderByName,
+} from "../../actions";
 import { Link } from "react-router-dom";
 import Card from "../Card/Card";
 import Paginado from "../Paginado/Paginado";
+import SearchBar from "../SearchBar/SearchBar";
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -18,6 +25,8 @@ export default function Home() {
     indexOfFirstPokemon,
     indexOfLastPokemon
   );
+  //Constante para ordenar
+  const [order, setOrden] = useState("");
 
   //Para el paginado
   const paginado = (pageNumber) => {
@@ -45,6 +54,19 @@ export default function Home() {
     dispatch(filterPokemonsByTypes(e.target.value));
   }
 
+  //Handle para filtrar por creados
+  function handleFilterCreated(e) {
+    dispatch(filterCreated(e.target.value));
+  }
+
+  //Handle para ordenar alfabeticamente
+  function handleSort(e) {
+    e.preventDefault();
+    dispatch(orderByName(e.target.value));
+    setCurrentPage(1);
+    setOrden(`Ordenado ${e.target.value}`);
+  }
+
   return (
     <div>
       <Link to="/pokemon">Crear Pokemon</Link>
@@ -57,7 +79,7 @@ export default function Home() {
         Volver a cargar Pokemons
       </button>
       <div>
-        <select>
+        <select onChange={(e) => handleSort(e)}>
           <option value="asc">A-Z</option>
           <option value="desc">Z-A</option>
         </select>
@@ -74,11 +96,12 @@ export default function Home() {
             </option>
           ))}
         </select>
-        <select>
+        <select onChange={(e) => handleFilterCreated(e)}>
           <option value="All">Todos</option>
-          <option value="creados">Creado</option>
-          <option value="existente">Existente</option>
+          <option value="created">Creado</option>
+          <option value="api">Existente</option>
         </select>
+        <SearchBar />
         <Paginado
           pokemonsPerPage={pokemonsPerPage}
           allPokemons={allPokemons}

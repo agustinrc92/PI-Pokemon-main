@@ -29,6 +29,47 @@ function rootReducer(state = initialState, action) {
         ...state,
         pokemons: typesFiltered,
       };
+    case "FILTER_CREATED":
+      const allPokemons2 = state.allPokemons;
+      const createdFilter =
+        action.payload === "created"
+          ? allPokemons2.filter((el) => el.created)
+          : allPokemons2.filter((el) => !el.created);
+      return {
+        ...state,
+        pokemons: action.payload === "All" ? state.allPokemons2 : createdFilter,
+      };
+    case "ORDER_BY_NAME":
+      let sortedArr =
+        action.payload === "asc"
+          ? state.pokemons.sort(function (a, b) {
+              if (a.name > b.name) {
+                return 1;
+              }
+              if (a.name < b.name) {
+                return -1;
+              }
+              return 0;
+            })
+          : state.pokemons.sort(function (a, b) {
+              if (a.name < b.name) {
+                return 1;
+              }
+              if (a.name > b.name) {
+                return -1;
+              }
+              return 0;
+            });
+      return {
+        ...state,
+        pokemons: sortedArr,
+      };
+    case "GET_NAME_POKEMONS":
+      return {
+        ...state,
+        pokemons: action.payload,
+      };
+
     default:
       return state;
   }
