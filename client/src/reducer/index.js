@@ -19,6 +19,10 @@ function rootReducer(state = initialState, action) {
         ...state,
         types: action.payload,
       };
+    case "POST_POKEMON":
+      return {
+        ...state,
+      };
     case "FILTER_POKEMONS_BY_TYPES":
       const allPokemons = state.allPokemons;
       const typesFiltered =

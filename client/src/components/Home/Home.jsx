@@ -69,7 +69,7 @@ export default function Home() {
 
   return (
     <div>
-      <Link to="/pokemon">Crear Pokemon</Link>
+      <Link to="/pokemons">Crear Pokemon</Link>
       <h1>POKEMON</h1>
       <button
         onClick={(e) => {

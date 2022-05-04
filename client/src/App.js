@@ -12,7 +12,7 @@ function App() {
         <Switch>
           <Route exath path="/home" component={Home} />
           <Route exact path="/" component={LandingPage} />
-          <Route exact path="/pokemon" component={PokemonCreate} />
+          <Route exact path="/pokemons" component={PokemonCreate} />
           <Route exact path="/pokemon/:id" component={Detail} />
         </Switch>
         <h1>Henry Pokemon</h1>

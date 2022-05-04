@@ -59,3 +59,13 @@ export function getNamePokemons(name) {
     }
   };
 }
+
+export function postPokemon(payload) {
+  return async function (dispatch) {
+    const response = await axios.post(
+      "http://localhost:3001/pokemons",
+      payload
+    );
+    return response;
+  };
+}
