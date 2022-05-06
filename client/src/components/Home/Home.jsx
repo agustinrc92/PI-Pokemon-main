@@ -7,6 +7,7 @@ import {
   filterPokemonsByTypes,
   filterCreated,
   orderByName,
+  orderByAttack,
 } from "../../actions";
 import { Link } from "react-router-dom";
 import Card from "../Card/Card";
@@ -54,6 +55,15 @@ export default function Home() {
     dispatch(filterPokemonsByTypes(e.target.value));
   }
 
+  //Handle para filtrar pokemons por attack
+
+  function handleOrderByAttack(e) {
+    e.preventDefault();
+    dispatch(orderByAttack(e.target.value));
+    setCurrentPage(1);
+    setOrden(`Ordenado ${e.target.value}`);
+  }
+
   //Handle para filtrar por creados
   function handleFilterCreated(e) {
     dispatch(filterCreated(e.target.value));
@@ -83,9 +93,9 @@ export default function Home() {
           <option value="asc">A-Z</option>
           <option value="desc">Z-A</option>
         </select>
-        <select>
-          <option value="asc">Debil a Fuerte</option>
-          <option value="desc">Fuerte a Debil</option>
+        <select onChange={(e) => handleOrderByAttack(e)}>
+          <option value="desc">Debil a Fuerte</option>
+          <option value="asc">Fuerte a Debil</option>
         </select>
         <select onChange={(e) => handleFilterTypes(e)}>
           <option disabled>Filter By Type</option>
