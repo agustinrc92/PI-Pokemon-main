@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { postPokemon, getTypes } from "../../actions";
 import { useDispatch, useSelector } from "react-redux";
+import logo from "../../img/Pokelogo.png";
+import "./PokemonCreate.css";
 
 export default function PokemonCreate() {
   const dispatch = useDispatch();
@@ -85,6 +87,7 @@ export default function PokemonCreate() {
       <Link to="/home">
         <button>Home</button>{" "}
       </Link>
+      <img src={logo} alt="Pokémon logo" class="logo" />
       <h1>Create Pokemon</h1>
       <form onSubmit={(e) => handleSubmit(e)}>
         <div>

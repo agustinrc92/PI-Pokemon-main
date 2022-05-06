@@ -13,6 +13,8 @@ import { Link } from "react-router-dom";
 import Card from "../Card/Card";
 import Paginado from "../Paginado/Paginado";
 import SearchBar from "../SearchBar/SearchBar";
+import "./Home.css";
+import logo from "../../img/Pokelogo.png";
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -27,7 +29,7 @@ export default function Home() {
     indexOfLastPokemon
   );
   //Constante para ordenar
-  const [order, setOrden] = useState("");
+  const [, setOrden] = useState("");
 
   //Para el paginado
   const paginado = (pageNumber) => {
@@ -79,9 +81,12 @@ export default function Home() {
 
   return (
     <div>
-      <Link to="/pokemons">Crear Pokemon</Link>
-      <h1>POKEMON</h1>
+      <Link to="/pokemons">
+        <button class="buttonDetalles">Crear Pokemon</button>
+      </Link>
+      <img src={logo} alt="Pokémon logo" class="logo" />
       <button
+        class="buttonDetalles"
         onClick={(e) => {
           handleClick(e);
         }}
@@ -89,15 +94,15 @@ export default function Home() {
         Volver a cargar Pokemons
       </button>
       <div>
-        <select onChange={(e) => handleSort(e)}>
+        <select class="barras" onChange={(e) => handleSort(e)}>
           <option value="asc">A-Z</option>
           <option value="desc">Z-A</option>
         </select>
-        <select onChange={(e) => handleOrderByAttack(e)}>
+        <select class="barras" onChange={(e) => handleOrderByAttack(e)}>
           <option value="desc">Debil a Fuerte</option>
           <option value="asc">Fuerte a Debil</option>
         </select>
-        <select onChange={(e) => handleFilterTypes(e)}>
+        <select class="barras" onChange={(e) => handleFilterTypes(e)}>
           <option disabled>Filter By Type</option>
           <option value="All">All Types</option>
           {types.map((types) => (
@@ -106,7 +111,7 @@ export default function Home() {
             </option>
           ))}
         </select>
-        <select onChange={(e) => handleFilterCreated(e)}>
+        <select class="barras" onChange={(e) => handleFilterCreated(e)}>
           <option value="All">Todos</option>
           <option value="created">Creado</option>
           <option value="api">Existente</option>
