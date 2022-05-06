@@ -10,11 +10,11 @@ import {
   orderByAttack,
 } from "../../actions";
 import { Link } from "react-router-dom";
-import Card from "../Card/Card";
 import Paginado from "../Paginado/Paginado";
 import SearchBar from "../SearchBar/SearchBar";
 import "./Home.css";
 import logo from "../../img/Pokelogo.png";
+import Cards from "../Cards/Cards";
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -123,22 +123,7 @@ export default function Home() {
           paginado={paginado}
         />
 
-        {currentPokemons &&
-          currentPokemons.map((el) => {
-            <Card name={el.name} image={el.image} types={el.types} />;
-            return (
-              <div>
-                <nav>
-                  <Card name={el.name} image={el.image} types={el.types} />
-                </nav>
-                <nav>
-                  <Link to={`pokemons/${el.id}`}>
-                    <button>Detalles</button>
-                  </Link>
-                </nav>
-              </div>
-            );
-          })}
+        <Cards pokemons={currentPokemons} />
       </div>
     </div>
   );
