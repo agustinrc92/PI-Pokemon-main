@@ -80,51 +80,53 @@ export default function Home() {
   }
 
   return (
-    <div>
-      <Link to="/pokemons">
-        <button class="buttonDetalles">Crear Pokemon</button>
-      </Link>
-      <img src={logo} alt="Pokémon logo" class="logo" />
-      <button
-        class="buttonDetalles"
-        onClick={(e) => {
-          handleClick(e);
-        }}
-      >
-        Volver a cargar Pokemons
-      </button>
+    <body class="body2">
       <div>
-        <select class="barras" onChange={(e) => handleSort(e)}>
-          <option value="asc">A-Z</option>
-          <option value="desc">Z-A</option>
-        </select>
-        <select class="barras" onChange={(e) => handleOrderByAttack(e)}>
-          <option value="desc">Debil a Fuerte</option>
-          <option value="asc">Fuerte a Debil</option>
-        </select>
-        <select class="barras" onChange={(e) => handleFilterTypes(e)}>
-          <option disabled>Filter By Type</option>
-          <option value="All">All Types</option>
-          {types.map((types) => (
-            <option value={types.name} key={types.id}>
-              {types.name[0].toUpperCase() + types.name.slice(1)}
-            </option>
-          ))}
-        </select>
-        <select class="barras" onChange={(e) => handleFilterCreated(e)}>
-          <option value="All">Todos</option>
-          <option value="created">Creado</option>
-          <option value="api">Existente</option>
-        </select>
-        <SearchBar />
-        <Paginado
-          pokemonsPerPage={pokemonsPerPage}
-          allPokemons={allPokemons}
-          paginado={paginado}
-        />
+        <Link to="/pokemons">
+          <button class="buttonDetalles">Create Pokemon</button>
+        </Link>
+        <img src={logo} alt="Pokémon logo" class="logo" />
+        <button
+          class="buttonDetalles"
+          onClick={(e) => {
+            handleClick(e);
+          }}
+        >
+          Reload Pokemons
+        </button>
+        <div>
+          <select class="barras" onChange={(e) => handleSort(e)}>
+            <option value="asc">A-Z</option>
+            <option value="desc">Z-A</option>
+          </select>
+          <select class="barras" onChange={(e) => handleOrderByAttack(e)}>
+            <option value="desc">Weak to Strong</option>
+            <option value="asc">Strong to Weak</option>
+          </select>
+          <select class="barras" onChange={(e) => handleFilterTypes(e)}>
+            <option disabled>Filter By Type</option>
+            <option value="All">All Types</option>
+            {types.map((types) => (
+              <option value={types.name} key={types.id}>
+                {types.name[0].toUpperCase() + types.name.slice(1)}
+              </option>
+            ))}
+          </select>
+          <select class="barras" onChange={(e) => handleFilterCreated(e)}>
+            <option value="All">All</option>
+            <option value="created">Created</option>
+            <option value="api">Existing</option>
+          </select>
+          <SearchBar />
+          <Paginado
+            pokemonsPerPage={pokemonsPerPage}
+            allPokemons={allPokemons}
+            paginado={paginado}
+          />
 
-        <Cards pokemons={currentPokemons} />
+          <Cards pokemons={currentPokemons} />
+        </div>
       </div>
-    </div>
+    </body>
   );
 }

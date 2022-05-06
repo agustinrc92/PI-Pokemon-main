@@ -83,107 +83,121 @@ export default function PokemonCreate() {
   }, [dispatch]);
 
   return (
-    <div>
-      <Link to="/home">
-        <button>Home</button>{" "}
-      </Link>
-      <img src={logo} alt="Pokémon logo" class="logo" />
-      <h1>Create Pokemon</h1>
-      <form onSubmit={(e) => handleSubmit(e)}>
+    <body class="body4">
+      <div>
+        <Link to="/home">
+          <button class="buttonCreate">Home</button>{" "}
+        </Link>
         <div>
-          <label>Name:</label>
-          <input
-            types="text"
-            value={input.name}
-            name="name"
-            onChange={(e) => handleChange(e)}
-          />
-          {errors.name && <p>{errors.name}</p>})
+          <img src={logo} alt="Pokémon logo" class="logo" />
         </div>
-        <div>
-          <label>Types</label>
-          <select onChange={(e) => handleSelect(e)}>
-            {types.map((types) => (
-              <option key={types.id} value={types.name}>
-                {types.name}
-              </option>
-            ))}
-          </select>
-          <ul>
-            <li>{input.types.map((el) => el + " ,")}</li>
-          </ul>
-        </div>
-        {input.types.map((el) => (
+        <h1 class="createPokemon">Create Pokemon</h1>
+        <form onSubmit={(e) => handleSubmit(e)}>
           <div>
-            <p>{el}</p>
-            <button onClick={() => handleDelete(el)}>X</button>
+            <label class="fontLabel">Name:</label>
+            <input
+              class="label"
+              types="text"
+              value={input.name}
+              name="name"
+              onChange={(e) => handleChange(e)}
+            />
+            {errors.name && <p>{errors.name}</p>})
           </div>
-        ))}
-        <div>
-          <label>HP:</label>
-          <input
-            type="number"
-            value={input.hp}
-            name="hp"
-            onChange={(e) => handleChange(e)}
-          />
-        </div>
-        <div>
-          <label>Attack:</label>
-          <input
-            type="number"
-            value={input.attack}
-            name="attack"
-            onChange={(e) => handleChange(e)}
-          />
-        </div>
-        <div>
-          <label>Defense:</label>
-          <input
-            type="number"
-            value={input.defense}
-            name="defense"
-            onChange={(e) => handleChange(e)}
-          />
-        </div>
-        <div>
-          <label>Speed:</label>
-          <input
-            type="number"
-            value={input.speed}
-            name="speed"
-            onChange={(e) => handleChange(e)}
-          />
-        </div>
-        <div>
-          <label>Height:</label>
-          <input
-            type="number"
-            value={input.height}
-            name="height"
-            onChange={(e) => handleChange(e)}
-          />
-        </div>
-        <div>
-          <label>Weight:</label>
-          <input
-            type="number"
-            value={input.weight}
-            name="weight"
-            onChange={(e) => handleChange(e)}
-          />
-        </div>
-        <div>
-          <label>Image:</label>
-          <input
-            type="text"
-            value={input.image}
-            name="image"
-            onChange={(e) => handleChange(e)}
-          />
-        </div>
-        <button type="submit">Create Pokemon</button>
-      </form>
-    </div>
+          <div>
+            <label class="fontLabel">Types: </label>
+            <select class="typesLabel" onChange={(e) => handleSelect(e)}>
+              {types.map((types) => (
+                <option key={types.id} value={types.name}>
+                  {types.name}
+                </option>
+              ))}
+            </select>
+            <ul>
+              <li>{input.types.map((el) => el + " ,")}</li>
+            </ul>
+          </div>
+          {input.types.map((el) => (
+            <div>
+              <p>{el}</p>
+              <button onClick={() => handleDelete(el)}>X</button>
+            </div>
+          ))}
+          <div>
+            <label class="fontLabel">HP:</label>
+            <input
+              class="label"
+              type="number"
+              value={input.hp}
+              name="hp"
+              onChange={(e) => handleChange(e)}
+            />
+          </div>
+          <div>
+            <label class="fontLabel">Attack:</label>
+            <input
+              class="label"
+              type="number"
+              value={input.attack}
+              name="attack"
+              onChange={(e) => handleChange(e)}
+            />
+          </div>
+          <div>
+            <label class="fontLabel">Defense:</label>
+            <input
+              class="label"
+              type="number"
+              value={input.defense}
+              name="defense"
+              onChange={(e) => handleChange(e)}
+            />
+          </div>
+          <div>
+            <label class="fontLabel">Speed:</label>
+            <input
+              class="label"
+              type="number"
+              value={input.speed}
+              name="speed"
+              onChange={(e) => handleChange(e)}
+            />
+          </div>
+          <div>
+            <label class="fontLabel">Height:</label>
+            <input
+              class="label"
+              type="number"
+              value={input.height}
+              name="height"
+              onChange={(e) => handleChange(e)}
+            />
+          </div>
+          <div>
+            <label class="fontLabel">Weight:</label>
+            <input
+              class="label"
+              type="number"
+              value={input.weight}
+              name="weight"
+              onChange={(e) => handleChange(e)}
+            />
+          </div>
+          <div>
+            <label class="fontLabel">Image:</label>
+            <input
+              class="label"
+              type="text"
+              value={input.image}
+              name="image"
+              onChange={(e) => handleChange(e)}
+            />
+          </div>
+          <button class="buttonCreate" type="submit">
+            Create Pokemon
+          </button>
+        </form>
+      </div>
+    </body>
   );
 }
