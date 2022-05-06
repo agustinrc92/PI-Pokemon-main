@@ -7,6 +7,7 @@ export default function PokemonCreate() {
   const dispatch = useDispatch();
   const types = useSelector((state) => state.types);
   const history = useHistory();
+  const [errors, setErrors] = useState({});
 
   const [input, setInput] = useState({
     name: "",
@@ -20,17 +21,27 @@ export default function PokemonCreate() {
     image: "",
   });
 
-  function handleChange(e) {
-    setInput({
-      ...input,
-      [e.target.name]: e.target.value,
-    });
+  function validate(input) {
+    let errors = {};
+    if (!input.name) {
+      errors.name = "Debes ingresar un nombre";
+    } else if (!input.hp) {
+      errors.hp = "Debes ingresar un HP";
+    }
+    return errors;
   }
 
   function handleSelect(e) {
     setInput({
       ...input,
       types: [...input.types, e.target.value],
+    });
+  }
+
+  function handleDelete(el) {
+    setInput({
+      ...input,
+      types: input.types.filter((types) => types !== el),
     });
   }
 
@@ -52,6 +63,19 @@ export default function PokemonCreate() {
     history.push("/home");
   }
 
+  function handleChange(e) {
+    setInput({
+      ...input,
+      [e.target.name]: e.target.value,
+    });
+    setErrors(
+      validate({
+        ...input,
+        status: e.target.value,
+      })
+    );
+  }
+
   useEffect(() => {
     dispatch(getTypes());
   }, [dispatch]);
@@ -71,6 +95,7 @@ export default function PokemonCreate() {
             name="name"
             onChange={(e) => handleChange(e)}
           />
+          {errors.name && <p>{errors.name}</p>})
         </div>
         <div>
           <label>Types</label>
@@ -85,6 +110,12 @@ export default function PokemonCreate() {
             <li>{input.types.map((el) => el + " ,")}</li>
           </ul>
         </div>
+        {input.types.map((el) => (
+          <div>
+            <p>{el}</p>
+            <button onClick={() => handleDelete(el)}>X</button>
+          </div>
+        ))}
         <div>
           <label>HP:</label>
           <input

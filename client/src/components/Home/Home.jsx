@@ -113,7 +113,14 @@ export default function Home() {
             <Card name={el.name} image={el.image} types={el.types} />;
             return (
               <div>
-                <Card name={el.name} image={el.image} types={el.types} />
+                <nav>
+                  <Card name={el.name} image={el.image} types={el.types} />
+                </nav>
+                <nav>
+                  <Link to={`pokemons/${el.id}`}>
+                    <button>Detalles</button>
+                  </Link>
+                </nav>
               </div>
             );
           })}
