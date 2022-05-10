@@ -20,7 +20,7 @@
 
 .body4 {
   background-image: url(https://gameranx.com/wp-content/uploads/2016/07/Pokemon-GO-720P-Wallpaper-1.jpg);
-  height: 110vh;
+  height: 130vh;
   background-size: cover;
 }
 
@@ -30,7 +30,7 @@
   border-radius: 10px;
   background: none;
   margin: 8px;
-  color: white;
+  color: black;
   background-color: white;
 }
 
